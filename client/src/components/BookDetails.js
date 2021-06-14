@@ -11,9 +11,11 @@ export const BookDetails = ({ bookId }) => {
 
   let content;
 
-  if (loading) content = <p>Loading...</p>;
-  else if (error) content = <p>Error Loading Data</p>;
-  else if (!bookId) content = <p>No Book Selected...</p>;
+  if (loading) content = <p data-testid="book-details-loading">Loading...</p>;
+  else if (error)
+    content = <p data-testid="book-details-error">Error Loading Data</p>;
+  else if (!bookId)
+    content = <p data-testid="book-details-none">No Book Selected...</p>;
   else {
     const {
       book: { name, genre, author },
@@ -33,5 +35,9 @@ export const BookDetails = ({ bookId }) => {
     );
   }
 
-  return <BookDetailsWrapper>{content}</BookDetailsWrapper>;
+  return (
+    <BookDetailsWrapper data-testid="book-details-success">
+      {content}
+    </BookDetailsWrapper>
+  );
 };

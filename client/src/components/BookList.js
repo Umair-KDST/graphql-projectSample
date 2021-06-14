@@ -8,14 +8,14 @@ export const BookList = () => {
   const { loading, error, data } = useQuery(GET_BOOKS_QUERY);
   const [selected, setSelected] = useState(null);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error Loading Data</p>;
+  if (loading) return <p data-testid="book-list-loading">Loading...</p>;
+  if (error) return <p data-testid="book-list-error">Error Loading Data</p>;
 
   const { books } = data;
 
-  const bookListItems = books.map(({ id, name }) => {
+  const bookListItems = books.map(({ id, name }, index) => {
     return (
-      <li key={id} onClick={() => setSelected(id)}>
+      <li data-testid={`book${index}`} key={id} onClick={() => setSelected(id)}>
         {name}
       </li>
     );
@@ -23,7 +23,9 @@ export const BookList = () => {
 
   return (
     <div>
-      <BookListWrapper id="book-list">{bookListItems}</BookListWrapper>
+      <BookListWrapper data-testid="book-list-success" id="book-list">
+        {bookListItems}
+      </BookListWrapper>
       <BookDetails bookId={selected} />
     </div>
   );
