@@ -10,15 +10,18 @@ import { mockBooksDataSuccess } from "./../utils/constants";
 afterEach(cleanup);
 
 it("Renders The No Books UI", () => {
-  renderWithSimpleApollo(<BookDetails />);
-  expect(screen.getByTestId("book-details-none")).toHaveTextContent(
-    "No Book Selected..."
+  renderWithSimpleApollo(<BookDetails bookId={"60c30d2944f3a103e0ff6ff1"} />);
+  expect(screen.getByTestId("book-details-loading")).toHaveTextContent(
+    "Loading"
   );
 });
 
 it("Renders The BookList Component", async () => {
   await act(async () =>
-    renderWithApollo(<BookDetails />, mockBooksDataSuccess)
+    renderWithApollo(
+      <BookDetails bookId={"60c30d2944f3a103e0ff6ff1"} />,
+      mockBooksDataSuccess
+    )
   );
   await act(async (resolve) => setTimeout(resolve, 0));
   expect(screen.getByTestId("book-details-success")).toBeInTheDocument();
