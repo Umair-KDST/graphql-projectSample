@@ -58,7 +58,7 @@ export const AddBook = () => {
         </select>
       </div>
 
-      <button>+</button>
+      <button data-testid="addbook-handler">+</button>
     </FormWrapper>
   );
 };
