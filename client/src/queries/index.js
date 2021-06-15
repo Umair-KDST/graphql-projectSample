@@ -45,3 +45,12 @@ export const GET_BOOK_QUERY = gql`
     }
   }
 `;
+
+export const BOOKS_SEARCH_QUERY = gql`
+  query ($name: String!) {
+    filterBooks(name: $name) {
+      name
+      id
+    }
+  }
+`;
