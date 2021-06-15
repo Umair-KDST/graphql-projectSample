@@ -6,4 +6,6 @@ const bookSchema = new mongoose.Schema({
   authorId: { type: String, required: true },
 });
 
+bookSchema.index({ name: "text" });
+
 module.exports = mongoose.model("Book", bookSchema);

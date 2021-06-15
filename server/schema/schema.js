@@ -72,6 +72,13 @@ const RootQuery = new GraphQLObjectType({
         return Author.find({});
       },
     },
+    filterBooks: {
+      type: new GraphQLList(BookType),
+      args: { name: { type: GraphQLString } },
+      resolve(parent, args) {
+        return Book.find({ $text: { $search: args.name } });
+      },
+    },
   },
 });
 
