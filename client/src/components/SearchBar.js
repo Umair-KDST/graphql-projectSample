@@ -24,12 +24,6 @@ export const SearchBar = () => {
       );
     });
 
-  const handleSearch = () => {
-    executeSearch({
-      variables: { name: searchFilter },
-    });
-  };
-
   return (
     <div>
       <div>
@@ -38,7 +32,15 @@ export const SearchBar = () => {
           type="text"
           onChange={(e) => setSearchFilter(e.target.value)}
         />{" "}
-        <SearchButton onClick={handleSearch}>OK</SearchButton>
+        <SearchButton
+          onClick={() =>
+            executeSearch({
+              variables: { name: searchFilter },
+            })
+          }
+        >
+          OK
+        </SearchButton>
       </div>
       <BookListWrapper data-testid="book-list-success" id="book-list">
         {bookListItems}
